@@ -19,8 +19,8 @@ const productProto =
 const server = new grpc.Server();
 
 let products = [
-  { id: 1, name: "Note 1", description: "Content 1", price: 11, stock: 9 },
-  { id: 2, name: "Note 2", description: "Content 2", price: 12, stock: 10 },
+  { id: 1, name: "Note 1", discription: "Content 1", price: 11, stock: 9 },
+  { id: 2, name: "Note 2", discription: "Content 2", price: 12, stock: 10 },
 ];
 
 server.addService(productProto.service, {
@@ -33,6 +33,20 @@ server.addService(productProto.service, {
     products.push(product);
     callback(null, product);
   },
+  deleteProduct: (call,callback)=>{
+    const id = parseInt(call.request.id)
+    products = products.filter(product => product.id !== id)
+    callback(null , {})
+  },
+  editProduct: (call , callback)=>{
+    const productId = call.request.id
+    const productItem = products.filter(product => product.id == productId)
+    productItem[0].name = call.request.name
+    productItem[0].discription = call.request.discription
+    productItem[0].price = call.request.price
+    productItem[0].stock = call.request.stock
+    callback(null , productItem)
+  }
 });
 
 const PORT = 5000;

@@ -3,6 +3,8 @@ syntax = "proto3";
 service ProductService {
     rpc getAllProducts(Empty) returns (ProductList) {}
     rpc createProduct(Product) returns (Product) {} 
+    rpc editProduct (Product) returns (Product){}
+    rpc deleteProduct(ProductId) returns (Empty){}
 }
 
 message Empty {}
@@ -10,11 +12,15 @@ message Empty {}
 message Product {
     int32 id = 1;
     string name = 2;
-    string description = 3;
+    string discription = 3;
     int32 price = 4;
     int32 stock = 5;
 }
 
 message ProductList {
     repeated Product products = 1;
+}
+
+message ProductId{
+    string id = 1;
 }

@@ -36,6 +36,31 @@ client.createProduct(newProduct, (error, response) => {
   console.log("Created Product:", response);
 });
 
+client.editProduct(
+  {
+    id: 3,
+    name: "mobile",
+    discription: "update product",
+    price: 100,
+    stock: 1,
+  },
+  (error, response) => {
+    if (error) {
+      console.error("Error creating product:", error);
+      return;
+    }
+    console.log("Created Product:", response);
+  }
+);
+
+client.deleteProduct({ id: "2" }, (error, product) => {
+  if (error) {
+    console.error("Error fetching products:", error);
+    return;
+  }
+  console.log(`Successfully deleted a one product.`);
+});
+
 client.getAllProducts({}, (error, response) => {
   if (error) {
     console.error("Error fetching products:", error);
@@ -44,4 +69,4 @@ client.getAllProducts({}, (error, response) => {
   console.log("Products:", response.products);
 });
 
-module.exports = client
+module.exports = client;
