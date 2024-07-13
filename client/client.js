@@ -69,4 +69,13 @@ client.getAllProducts({}, (error, response) => {
   console.log("Products:", response.products);
 });
 
+client.getProductById({ id: "3" }, (error, product) => {
+  if (error) {
+    console.error("Error fetching product:", error);
+    return;
+  }
+  console.log("Find Product:", product);
+});
+
+
 module.exports = client;

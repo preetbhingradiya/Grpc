@@ -33,20 +33,25 @@ server.addService(productProto.service, {
     products.push(product);
     callback(null, product);
   },
-  deleteProduct: (call,callback)=>{
-    const id = parseInt(call.request.id)
-    products = products.filter(product => product.id !== id)
-    callback(null , {})
+  deleteProduct: (call, callback) => {
+    const id = parseInt(call.request.id);
+    products = products.filter((product) => product.id !== id);
+    callback(null, {});
   },
-  editProduct: (call , callback)=>{
-    const productId = call.request.id
-    const productItem = products.filter(product => product.id == productId)
-    productItem[0].name = call.request.name
-    productItem[0].discription = call.request.discription
-    productItem[0].price = call.request.price
-    productItem[0].stock = call.request.stock
-    callback(null , productItem)
-  }
+  editProduct: (call, callback) => {
+    const productId = call.request.id;
+    const productItem = products.filter((product) => product.id == productId);
+    productItem[0].name = call.request.name;
+    productItem[0].discription = call.request.discription;
+    productItem[0].price = call.request.price;
+    productItem[0].stock = call.request.stock;
+    callback(null, productItem);
+  },
+  getProductById: (call, callback) => {
+    let id = parseInt(call.request.id);
+    let product = products.find((product) => product.id === id);
+    callback(null, product); 
+  },
 });
 
 const PORT = 5000;

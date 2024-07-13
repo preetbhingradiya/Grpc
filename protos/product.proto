@@ -5,6 +5,7 @@ service ProductService {
     rpc createProduct(Product) returns (Product) {} 
     rpc editProduct (Product) returns (Product){}
     rpc deleteProduct(ProductId) returns (Empty){}
+    rpc getProductById(ProductId) returns (Product){}
 }
 
 message Empty {}
