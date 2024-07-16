@@ -1,0 +1,22 @@
+{
+  "name": "microservice",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "recipe": "nodemon recipe-ms/recipe.js",
+    "processor": "nodemon processor-ms/processor.js",
+    "start": "concurrently --kill-others \"npm run recipe\" \"npm run processor\""
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.11.0",
+    "@grpc/proto-loader": "^0.7.13",
+    "express": "^4.19.2",
+    "readline": "^1.3.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

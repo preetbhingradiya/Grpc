@@ -41,16 +41,23 @@ server.addService(productProto.service, {
   editProduct: (call, callback) => {
     const productId = call.request.id;
     const productItem = products.filter((product) => product.id == productId);
-    productItem[0].name = call.request.name;
-    productItem[0].discription = call.request.discription;
-    productItem[0].price = call.request.price;
-    productItem[0].stock = call.request.stock;
-    callback(null, productItem);
+    if (productItem) {
+      productItem[0].name = call.request.name;
+      productItem[0].discription = call.request.discription;
+      productItem[0].price = call.request.price;
+      productItem[0].stock = call.request.stock;
+      callback(null, productItem);
+    } else {
+      callback({
+        code: grpc.status.NOT_FOUND,
+        details: "Not found"
+      });
+    }
   },
   getProductById: (call, callback) => {
     let id = parseInt(call.request.id);
     let product = products.find((product) => product.id === id);
-    callback(null, product); 
+    callback(null, product);
   },
 });
 
@@ -65,7 +72,7 @@ server.bindAsync(
       console.error("Server bind failed:", error);
     } else {
       console.log(`Server running at http://${HOST}:${port}`);
-      server.start();
+      // server.start();
     }
   }
 );

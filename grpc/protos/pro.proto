@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package ecommerce;
+
+service ProductService {
+    rpc CreateProduct(ProductRequest) returns (ProductResponse);
+    rpc GetAllProducts(Empty) returns (ProductList) {};
+    rpc UpdateProduct(UpdateProductrequest) returns (ProductResponse);
+    rpc GetProduct(ProductId) returns  (ProductResponse);
+    rpc DeleteProduct(ProductId) returns (Empty);
+}
+
+message Empty {}
+
+message ProductRequest {
+    string name = 1;
+    string description = 2;
+    int32 price = 3;
+    int32 stock = 4;
+}
+
+message ProductId{
+    string id = 1;
+}
+
+message ProductList {
+    repeated ProductResponse products = 1;
+}
+
+message ProductResponse {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    int32 price = 4;
+    int32 stock = 5;
+}
+
+message UpdateProductrequest {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    int32 price = 4;
+    int32 stock = 5;
+}
